@@ -2,3 +2,6 @@
 *.iml
 out
 target
+java/.classpath
+java/.project
+java/.settings/
