@@ -4,11 +4,17 @@
   "description": "basic nodejs setup for unit testing",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "chai": "^3.4.1"
+    "chai": "^3.4.1",
+    "istanbul": "^0.4.1",
+    "karma": "^0.13.19",
+    "karma-phantomjs-launcher": "^0.2.3",
+    "mocha": "^2.3.4",
+    "phantomjs": "^1.9.19"
   }
 }

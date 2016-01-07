@@ -1,5 +1,4 @@
 
-module.exports = Kata;
 
 function Kata() {
 
@@ -10,3 +9,5 @@ Kata.prototype = {
         return 'tata'
     }
 }
+
+module.exports = Kata;
