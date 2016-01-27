@@ -4,17 +4,27 @@
   "description": "basic nodejs setup for unit testing",
   "main": "index.js",
   "scripts": {
-    "test": "test",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test"
+    "test": "mocha --ui exports --reporter spec",
+    "coverage": "mochacoverage",
+    "monitor": "mocha --ui exports --reporter min --watch",
+    "debugtest": "mocha --debug-brk --ui exports --reporter spec"
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {},
   "devDependencies": {
     "chai": "^3.4.1",
     "istanbul": "^0.4.1",
     "karma": "^0.13.19",
     "karma-phantomjs-launcher": "^0.2.3",
     "mocha": "^2.3.4",
-    "phantomjs": "^1.9.19"
-  }
+    "phantomjs": "^1.9.19",
+    "mochawrapper": ""
+  },
+  "keywords": [
+    "kata",
+    "tdd"
+  ],
+  "contributors": [],
+  "repository": "git@github.com:martinsson/kata-setup.git"
 }
