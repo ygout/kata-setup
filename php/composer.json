@@ -1,0 +1,15 @@
+{
+    "name": "martinsson/kata_setup",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Johan MARTINSSON",
+            "email": "martinsson.johan@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^5.5"
+    }
+}
