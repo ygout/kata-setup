@@ -3,7 +3,7 @@
 Adding popular testing libs :
 
 * junit
-* fest-assert
+* assertj
 * mockito
 
 to run testsuites just run "mvn clean test"
