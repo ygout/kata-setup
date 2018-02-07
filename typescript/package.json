@@ -20,7 +20,7 @@
     "test": "mocha --require ts-node/register --recursive 'test/**/*-spec.ts'",
     "coverage": "nyc --reporter=text --reporter=html mocha --require ts-node/register",
     "watch": "npm run build -- --watch",
-    "watch:test": "npm run test -- --watch"
+    "watch:test": "npm run test -- --watch-extensions ts  --watch"
   },
   "dependencies": {},
   "devDependencies": {
