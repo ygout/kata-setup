@@ -1,12 +1,7 @@
 
-
-function Kata() {
-
-}
-
-Kata.prototype = {
-    toto: function() {
-        return 'tata'
+class Kata {
+    toto() {
+        return 'tata';
     }
 }
 
