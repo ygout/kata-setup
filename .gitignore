@@ -5,3 +5,4 @@ target
 java/.classpath
 java/.project
 java/.settings/
+.DS_Store
