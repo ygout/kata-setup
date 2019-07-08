@@ -7,7 +7,7 @@ namespace test
     {
 
         static string North = "N";
-        static int[] AnyPosition = { 1, 2 };
+        static Position AnyPosition = new Position(1, 2);
 
         // input 
         /// initialpos: [x, y]
@@ -23,9 +23,9 @@ namespace test
         public void InAbsenceOfCommandsTheCurrentStateIsTheInitialState()
         {
             var initialDirection = North;
-            int[] initialPosition = AnyPosition;
+            var initialPosition = AnyPosition;
 
-            Tuple<string, int[]> roverState = MoveRover(initialDirection, initialPosition, "");
+            Tuple<string, Position> roverState = MoveRover(initialDirection, initialPosition, "");
 
             Assert.Equal(initialDirection, roverState.Item1);
             Assert.Equal(initialPosition, roverState.Item2);
@@ -42,35 +42,69 @@ namespace test
         public void MoveOneStepForward()
         {
             var initialDirection = North;
-            int[] initialPosition = { 1, 2 };
+            var initialPosition = new Position(1, 2);
             var commands = "f";
 
-            Tuple<string, int[]> roverState = MoveRover(initialDirection, initialPosition, commands);
+            Tuple<string, Position> roverState = MoveRover(initialDirection, initialPosition, commands);
 
             Assert.Equal(initialDirection, roverState.Item1);
-            Assert.Equal(new int[] { 1, 3 }, roverState.Item2);
+            Assert.Equal(new Position(1, 3), roverState.Item2);
         }
 
         [Fact]
         public void MoveTwoStepsForward()
         {
             var initialDirection = North;
-            int[] initialPosition = { 1, 2 };
+            var initialPosition = new Position(1, 2);
             var commands = "ff";
 
-            Tuple<string, int[]> roverState = MoveRover(initialDirection, initialPosition, commands);
+            Tuple<string, Position> roverState = MoveRover(initialDirection, initialPosition, commands);
 
             Assert.Equal(initialDirection, roverState.Item1);
-            Assert.Equal(new int[] { 1, 4 }, roverState.Item2);
+            Assert.Equal(new Position(1, 4), roverState.Item2);
         }
 
-        private static Tuple<string, int[]> MoveRover(string initialDirection, int[] initialPosition, string commands)
+        private static Tuple<string, Position> MoveRover(string initialDirection, Position initialPosition, string commands)
         {
             var currentDirection = initialDirection;
             var deltaOnYAxis = commands.Length;
-            int[] currentPosition = { initialPosition[0], initialPosition[1] + deltaOnYAxis };
-            var roverState = new Tuple<string, int[]>(currentDirection, currentPosition);
+            Position currentPosition = new Position( initialPosition.x, initialPosition.y + deltaOnYAxis );
+            var roverState = new Tuple<string, Position>(currentDirection, currentPosition);
             return roverState;
+        }
+    }
+
+    public class Position
+    {
+
+        public int x {get;}
+        public int y {get;}
+
+        public Position(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+
+            Position p = (Position)obj;
+            return (x == p.x) && (y == p.y);
+        }
+
+        public override int GetHashCode()
+        {
+            return (x << 2) ^ y;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("({0}, {1})", x, y);
         }
     }
 }
