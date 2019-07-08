@@ -25,11 +25,10 @@ namespace test
             var initialDirection = North;
             int[] initialPosition = AnyPosition;
 
-            string currentDirection = initialDirection;
-            int[] currentPosition = initialPosition;
+            Tuple<string, int[]> roverState = MoveRover(initialDirection, initialPosition, "");
 
-            Assert.Equal(initialDirection, currentDirection);
-            Assert.Equal(initialPosition, currentPosition);
+            Assert.Equal(initialDirection, roverState.Item1);
+            Assert.Equal(initialPosition, roverState.Item2);
 
             // 1.
             // at the moment no public boundary, so no problem using string
@@ -46,14 +45,10 @@ namespace test
             int[] initialPosition = { 1, 2 };
             var commands = "f";
 
-            string currentDirection = initialDirection;
-            const int deltaOnYAxis = 1;
-            int[] currentPosition = { initialPosition[0], initialPosition[1] + deltaOnYAxis };
+            Tuple<string, int[]> roverState = MoveRover(initialDirection, initialPosition, commands);
 
-            Assert.Equal(initialDirection, currentDirection);
-            Assert.Equal(new int[] { 1, 3 }, currentPosition);
-
-            // We do not use commands, but need to see it because it is the test concept.
+            Assert.Equal(initialDirection, roverState.Item1);
+            Assert.Equal(new int[] { 1, 3 }, roverState.Item2);
         }
 
         [Fact]
@@ -63,13 +58,19 @@ namespace test
             int[] initialPosition = { 1, 2 };
             var commands = "ff";
 
-            string currentDirection = initialDirection;
-            int deltaOnYAxis = commands.Length;
-            int[] currentPosition = { initialPosition[0], initialPosition[1] + deltaOnYAxis };
+            Tuple<string, int[]> roverState = MoveRover(initialDirection, initialPosition, commands);
 
-            Assert.Equal(initialDirection, currentDirection);
-            Assert.Equal(new int[] { 1, 4 }, currentPosition);
+            Assert.Equal(initialDirection, roverState.Item1);
+            Assert.Equal(new int[] { 1, 4 }, roverState.Item2);
         }
 
+        private static Tuple<string, int[]> MoveRover(string initialDirection, int[] initialPosition, string commands)
+        {
+            var currentDirection = initialDirection;
+            var deltaOnYAxis = commands.Length;
+            int[] currentPosition = { initialPosition[0], initialPosition[1] + deltaOnYAxis };
+            var roverState = new Tuple<string, int[]>(currentDirection, currentPosition);
+            return roverState;
+        }
     }
 }
