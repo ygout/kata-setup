@@ -7,6 +7,7 @@ namespace test
     {
 
         static string North = "N";
+        static int[] AnyPosition = {1, 2};
 
         // input 
         /// initialpos: [x, y]
@@ -22,7 +23,7 @@ namespace test
         public void InAbsenceOfCommandsTheCurrentStateIsTheInitialState()
         {
             var initialDirection = North;
-            int[] initialPosition = {1, 2};
+            int[] initialPosition = AnyPosition;
 
             string currentDirection = initialDirection;
             int[] currentPosition = initialPosition;
@@ -30,8 +31,12 @@ namespace test
             Assert.Equal(initialDirection, currentDirection);
             Assert.Equal(initialPosition, currentPosition);
 
+            // 1.
             // at the moment no public boundary, so no problem using string
             // at the moment this is readable
+
+            // 2.
+            // There is a concept lurking in "state", what is it?
         }
 
     }
