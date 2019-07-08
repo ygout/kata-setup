@@ -7,7 +7,7 @@ namespace test
     {
 
         static string North = "N";
-        static int[] AnyPosition = {1, 2};
+        static int[] AnyPosition = { 1, 2 };
 
         // input 
         /// initialpos: [x, y]
@@ -37,6 +37,20 @@ namespace test
 
             // 2.
             // There is a concept lurking in "state", what is it?
+        }
+
+        [Fact]
+        public void MoveOneStepForward()
+        {
+            var initialDirection = North;
+            int[] initialPosition = { 1, 2 };
+
+            string currentDirection = initialDirection;
+            const int deltaNorth = 1;
+            int[] currentPosition = { initialPosition[0], initialPosition[1] + deltaNorth };
+
+            Assert.Equal(initialDirection, currentDirection);
+            Assert.Equal(new int[] { 1, 3 }, currentPosition);
         }
 
     }
