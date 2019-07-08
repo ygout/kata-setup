@@ -68,22 +68,30 @@ namespace test
         {
             var currentDirection = initialDirection;
             var deltaOnYAxis = commands.Length;
-            Position currentPosition = new Position( initialPosition.x, initialPosition.y + deltaOnYAxis );
+
+            Position currentPosition = initialPosition.Add(deltaOnYAxis);
+
             var roverState = new Tuple<string, Position>(currentDirection, currentPosition);
             return roverState;
         }
+
     }
 
     public class Position
     {
 
-        public int x {get;}
-        public int y {get;}
+        private readonly int x;
+        private readonly int y;
 
         public Position(int x, int y)
         {
             this.x = x;
             this.y = y;
+        }
+
+        public Position Add(int deltaOnYAxis)
+        {
+            return new Position(x, y + deltaOnYAxis);
         }
 
         public override bool Equals(object obj)
@@ -95,6 +103,7 @@ namespace test
 
             Position p = (Position)obj;
             return (x == p.x) && (y == p.y);
+
         }
 
         public override int GetHashCode()
