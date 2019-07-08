@@ -17,16 +17,18 @@ namespace test
         /// currentpos: [x1, y1]
         /// currentdir: 'N' 
         /// OR BLOCKED
-        
 
         [Fact]
-        public void ShouldFaceNorthWhenInitializedNorth()
+        public void InAbsenceOfCommandsTheCurrentStateIsTheInitialState()
         {
             var initialDirection = North;
+            int[] initialPosition = {1, 2};
 
             string currentDirection = initialDirection;
+            int[] currentPosition = initialPosition;
 
             Assert.Equal(initialDirection, currentDirection);
+            Assert.Equal(initialPosition, currentPosition);
 
             // at the moment no public boundary, so no problem using string
             // at the moment this is readable
