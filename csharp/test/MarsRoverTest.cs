@@ -44,13 +44,31 @@ namespace test
         {
             var initialDirection = North;
             int[] initialPosition = { 1, 2 };
+            var commands = "f";
 
             string currentDirection = initialDirection;
-            const int deltaNorth = 1;
-            int[] currentPosition = { initialPosition[0], initialPosition[1] + deltaNorth };
+            const int deltaOnYAxis = 1;
+            int[] currentPosition = { initialPosition[0], initialPosition[1] + deltaOnYAxis };
 
             Assert.Equal(initialDirection, currentDirection);
             Assert.Equal(new int[] { 1, 3 }, currentPosition);
+
+            // We do not use commands, but need to see it because it is the test concept.
+        }
+
+        [Fact]
+        public void MoveTwoStepsForward()
+        {
+            var initialDirection = North;
+            int[] initialPosition = { 1, 2 };
+            var commands = "ff";
+
+            string currentDirection = initialDirection;
+            int deltaOnYAxis = commands.Length;
+            int[] currentPosition = { initialPosition[0], initialPosition[1] + deltaOnYAxis };
+
+            Assert.Equal(initialDirection, currentDirection);
+            Assert.Equal(new int[] { 1, 4 }, currentPosition);
         }
 
     }
