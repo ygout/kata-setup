@@ -21,40 +21,37 @@ namespace test
         [Fact]
         public void InAbsenceOfCommandsTheCurrentStateIsTheInitialState()
         {
-            var initialDirection = Direction.North;
-            var initialPosition = AnyPosition;
+            var initialRover = new Rover(Direction.North, AnyPosition);
 
             const string none = "";
-            var roverState = new Commands(none).MoveRover(new Rover(initialDirection, initialPosition));
+            var rover = new Commands(none).MoveRover(initialRover);
 
-            Assert.Equal(initialDirection, roverState.Direction);
-            Assert.Equal(initialPosition, roverState.Position);
+            Assert.Equal(Direction.North, rover.Direction);
+            Assert.Equal(AnyPosition, rover.Position);
         }
 
         [Fact]
         public void MoveOneStepForward()
         {
-            var initialDirection = Direction.North;
-            var initialPosition = new Position(1, 2);
+            var initialRover = new Rover(Direction.North, new Position(1, 2));
+
             var commands = "f";
+            var rover = new Commands(commands).MoveRover(initialRover);
 
-            var roverState = new Commands(commands).MoveRover(new Rover(initialDirection, initialPosition));
-
-            Assert.Equal(initialDirection, roverState.Direction);
-            Assert.Equal(new Position(1, 3), roverState.Position);
+            Assert.Equal(Direction.North, rover.Direction);
+            Assert.Equal(new Position(1, 3), rover.Position);
         }
 
         [Fact]
         public void MoveTwoStepsForward()
         {
-            var initialDirection = Direction.North;
-            var initialPosition = new Position(1, 2);
+            var initialRover = new Rover(Direction.North, new Position(1, 2));
+
             var commands = "ff";
+            var rover = new Commands(commands).MoveRover(initialRover);
 
-            var roverState = new Commands(commands).MoveRover(new Rover(initialDirection, initialPosition));
-
-            Assert.Equal(initialDirection, roverState.Direction);
-            Assert.Equal(new Position(1, 4), roverState.Position);
+            Assert.Equal(Direction.North, rover.Direction);
+            Assert.Equal(new Position(1, 4), rover.Position);
         }
 
     }
@@ -92,8 +89,7 @@ namespace test
             // Besides constraint, what proof do we need to wrap it? Needs behaviour or at least mean something in domain.
             // Let's wait with the refactoring of deltaOnYAxis and reevaluate after each "green".
 
-            var roverState = new Rover(currentDirection, currentPosition);
-            return roverState;
+            return new Rover(currentDirection, currentPosition);
         }
     }
 
