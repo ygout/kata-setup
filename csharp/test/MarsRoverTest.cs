@@ -25,7 +25,8 @@ namespace test
             var initialDirection = North;
             var initialPosition = AnyPosition;
 
-            Tuple<string, Position> roverState = MoveRover(initialDirection, initialPosition, "");
+            const string none = "";
+            Tuple<string, Position> roverState = new Commands(none).MoveRover(initialDirection, initialPosition);
 
             Assert.Equal(initialDirection, roverState.Item1);
             Assert.Equal(initialPosition, roverState.Item2);
@@ -45,7 +46,7 @@ namespace test
             var initialPosition = new Position(1, 2);
             var commands = "f";
 
-            Tuple<string, Position> roverState = MoveRover(initialDirection, initialPosition, commands);
+            Tuple<string, Position> roverState = new Commands(commands).MoveRover(initialDirection, initialPosition);
 
             Assert.Equal(initialDirection, roverState.Item1);
             Assert.Equal(new Position(1, 3), roverState.Item2);
@@ -58,13 +59,24 @@ namespace test
             var initialPosition = new Position(1, 2);
             var commands = "ff";
 
-            Tuple<string, Position> roverState = MoveRover(initialDirection, initialPosition, commands);
+            Tuple<string, Position> roverState = new Commands(commands).MoveRover(initialDirection, initialPosition);
 
             Assert.Equal(initialDirection, roverState.Item1);
             Assert.Equal(new Position(1, 4), roverState.Item2);
         }
 
-        private static Tuple<string, Position> MoveRover(string initialDirection, Position initialPosition, string commands)
+    }
+
+    public class Commands
+    {
+        private readonly string commands;
+
+        public Commands(string commands)
+        {
+            this.commands = commands;
+        }
+
+        public Tuple<string, Position> MoveRover(string initialDirection, Position initialPosition)
         {
             var currentDirection = initialDirection;
             var deltaOnYAxis = commands.Length;
@@ -74,7 +86,6 @@ namespace test
             var roverState = new Tuple<string, Position>(currentDirection, currentPosition);
             return roverState;
         }
-
     }
 
     public class Position
@@ -100,10 +111,8 @@ namespace test
             {
                 return false;
             }
-
             Position p = (Position)obj;
             return (x == p.x) && (y == p.y);
-
         }
 
         public override int GetHashCode()
