@@ -82,6 +82,10 @@ namespace test
             var deltaOnYAxis = commands.Length;
 
             Position currentPosition = initialPosition.Add(deltaOnYAxis);
+            // 3.
+            // Johan looks for more proof to refactor, question is if we want to wrap Direction right now?
+            // Besides constraint, what proof do we need to wrap it? Needs behaviour or at least mean something in domain.
+            // Let's wait with the refactoring of deltaOnYAxis and reevaluate after each "green".
 
             var roverState = new Tuple<string, Position>(currentDirection, currentPosition);
             return roverState;
