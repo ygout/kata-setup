@@ -21,13 +21,15 @@ namespace test
         [Fact]
         public void InAbsenceOfCommandsTheCurrentStateIsTheInitialState()
         {
-            var initialRover = new Rover(Direction.North, AnyPosition);
+            var initialDirection = Direction.North;
+            var initialPosition = AnyPosition;
+            var initialRover = new Rover(initialDirection, initialPosition);
 
             const string none = "";
             var rover = new Commands(none).MoveRover(initialRover);
 
-            Assert.Equal(Direction.North, rover.Direction);
-            Assert.Equal(AnyPosition, rover.Position);
+            Assert.Equal(initialDirection, rover.Direction);
+            Assert.Equal(initialPosition, rover.Position);
         }
 
         [Fact]
@@ -54,8 +56,27 @@ namespace test
             Assert.Equal(new Position(1, 4), rover.Position);
         }
 
-    }
+        [Fact]
+        public void MoveOneStepsForwardAndOneStepBack()
+        {
+            var initialDirection = Direction.North;
+            var initialPosition = AnyPosition;
+            var initialRover = new Rover(initialDirection, initialPosition);
 
+            var commands = "fb";
+
+            Position firstPositin = initialPosition.Add(1);
+            Position currentPosition = firstPositin.Add(-1);
+
+            var rover = new Rover(initialDirection, currentPosition);
+
+            Assert.Equal(initialDirection, rover.Direction);
+            Assert.Equal(initialPosition, rover.Position);
+            // "Problem" now is that we are not progressing the existing code.
+            // Maybe we extracted too early.
+        }
+
+    }
 
     public class Rover
     {
