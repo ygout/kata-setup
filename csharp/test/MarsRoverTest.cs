@@ -6,7 +6,6 @@ namespace test
     public class MarsRoverTest
     {
 
-        static string North = "N";
         static Position AnyPosition = new Position(1, 2);
 
         // input 
@@ -22,11 +21,11 @@ namespace test
         [Fact]
         public void InAbsenceOfCommandsTheCurrentStateIsTheInitialState()
         {
-            var initialDirection = North;
+            var initialDirection = Direction.North;
             var initialPosition = AnyPosition;
 
             const string none = "";
-            Tuple<string, Position> roverState = new Commands(none).MoveRover(initialDirection, initialPosition);
+            var roverState = new Commands(none).MoveRover(initialDirection, initialPosition);
 
             Assert.Equal(initialDirection, roverState.Item1);
             Assert.Equal(initialPosition, roverState.Item2);
@@ -42,11 +41,11 @@ namespace test
         [Fact]
         public void MoveOneStepForward()
         {
-            var initialDirection = North;
+            var initialDirection = Direction.North;
             var initialPosition = new Position(1, 2);
             var commands = "f";
 
-            Tuple<string, Position> roverState = new Commands(commands).MoveRover(initialDirection, initialPosition);
+            var roverState = new Commands(commands).MoveRover(initialDirection, initialPosition);
 
             Assert.Equal(initialDirection, roverState.Item1);
             Assert.Equal(new Position(1, 3), roverState.Item2);
@@ -55,11 +54,11 @@ namespace test
         [Fact]
         public void MoveTwoStepsForward()
         {
-            var initialDirection = North;
+            var initialDirection = Direction.North;
             var initialPosition = new Position(1, 2);
             var commands = "ff";
 
-            Tuple<string, Position> roverState = new Commands(commands).MoveRover(initialDirection, initialPosition);
+            var roverState = new Commands(commands).MoveRover(initialDirection, initialPosition);
 
             Assert.Equal(initialDirection, roverState.Item1);
             Assert.Equal(new Position(1, 4), roverState.Item2);
@@ -76,7 +75,7 @@ namespace test
             this.commands = commands;
         }
 
-        public Tuple<string, Position> MoveRover(string initialDirection, Position initialPosition)
+        public Tuple<Direction, Position> MoveRover(Direction initialDirection, Position initialPosition)
         {
             var currentDirection = initialDirection;
             var deltaOnYAxis = commands.Length;
@@ -87,9 +86,13 @@ namespace test
             // Besides constraint, what proof do we need to wrap it? Needs behaviour or at least mean something in domain.
             // Let's wait with the refactoring of deltaOnYAxis and reevaluate after each "green".
 
-            var roverState = new Tuple<string, Position>(currentDirection, currentPosition);
+            var roverState = new Tuple<Direction, Position>(currentDirection, currentPosition);
             return roverState;
         }
+    }
+
+    public enum Direction {
+        North
     }
 
     public class Position
