@@ -65,7 +65,7 @@ namespace test
 
             var commands = "fb";
 
-            Position firstPositin = initialPosition.Add(1);
+            Position firstPositin = initialPosition.Add(+1);
             Position currentPosition = firstPositin.Add(-1);
 
             var rover = new Rover(initialDirection, currentPosition);
@@ -104,7 +104,11 @@ namespace test
             var currentDirection = rover.Direction;
             var deltaOnYAxis = commands.Length;
 
-            Position currentPosition = rover.Position.Add(deltaOnYAxis);
+            Position currentPosition = rover.Position;
+            for (int i = 0; i < deltaOnYAxis; i++)
+            {
+                currentPosition = currentPosition.Add(+1);
+            }
             // 3.
             // Johan looks for more proof to refactor, question is if we want to wrap Direction right now?
             // Besides constraint, what proof do we need to wrap it? Needs behaviour or at least mean something in domain.
@@ -114,7 +118,8 @@ namespace test
         }
     }
 
-    public enum Direction {
+    public enum Direction
+    {
         North
     }
 
