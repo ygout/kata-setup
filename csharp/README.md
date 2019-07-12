@@ -45,11 +45,23 @@ http://kata-log.rocks/mars-rover-kata
 * Maybe figure out why we could not commit is VS Code
 * Maybe figure out why Peter could not run tests is VS Code
 
+### 12 July
+
+* Beginning was good (progress mechanical refactoring)
+* Rider is better than VS Code ;-)
+* Johan did not see where Peter wanted to go twice at least.
+* Johan would like to write more tests before refactoring by TDDaiymi.
+* Peter wanted to move forward the solution with using existing solution.
+* Maybe it is a problem because we know existing solutions. Are we biased?
+* Write more tests to have more proof.
+
 Open for next
 
-* wrap Direction
-* wrap Tuple
-* wrap Commands
+* Inline existing Move method.
+* Delay extracting main logic until we know more - sufficient proof.
+
+Later
+
 * delete test which only goes one North
 * Curious to see if Command and Direction will have behaviour
 * BugZero Rule: can we create illegal Commands?
