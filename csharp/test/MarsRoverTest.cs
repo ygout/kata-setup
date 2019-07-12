@@ -25,17 +25,10 @@ namespace test
             var initialPosition = AnyPosition;
 
             const string none = "";
-            var roverState = new Commands(none).MoveRover(initialDirection, initialPosition);
+            var roverState = new Commands(none).MoveRover(new Rover(initialDirection, initialPosition));
 
-            Assert.Equal(initialDirection, roverState.Item1);
-            Assert.Equal(initialPosition, roverState.Item2);
-
-            // 1.
-            // at the moment no public boundary, so no problem using string
-            // at the moment this is readable
-
-            // 2.
-            // There is a concept lurking in "state", what is it?
+            Assert.Equal(initialDirection, roverState.Direction);
+            Assert.Equal(initialPosition, roverState.Position);
         }
 
         [Fact]
@@ -45,10 +38,10 @@ namespace test
             var initialPosition = new Position(1, 2);
             var commands = "f";
 
-            var roverState = new Commands(commands).MoveRover(initialDirection, initialPosition);
+            var roverState = new Commands(commands).MoveRover(new Rover(initialDirection, initialPosition));
 
-            Assert.Equal(initialDirection, roverState.Item1);
-            Assert.Equal(new Position(1, 3), roverState.Item2);
+            Assert.Equal(initialDirection, roverState.Direction);
+            Assert.Equal(new Position(1, 3), roverState.Position);
         }
 
         [Fact]
@@ -58,12 +51,25 @@ namespace test
             var initialPosition = new Position(1, 2);
             var commands = "ff";
 
-            var roverState = new Commands(commands).MoveRover(initialDirection, initialPosition);
+            var roverState = new Commands(commands).MoveRover(new Rover(initialDirection, initialPosition));
 
-            Assert.Equal(initialDirection, roverState.Item1);
-            Assert.Equal(new Position(1, 4), roverState.Item2);
+            Assert.Equal(initialDirection, roverState.Direction);
+            Assert.Equal(new Position(1, 4), roverState.Position);
         }
 
+    }
+
+
+    public class Rover
+    {
+        public Rover(Direction direction, Position position)
+        {
+            Direction = direction;
+            Position = position;
+        }
+
+        public Direction Direction { get; private set; }
+        public Position Position { get; private set; }
     }
 
     public class Commands
@@ -75,18 +81,18 @@ namespace test
             this.commands = commands;
         }
 
-        public Tuple<Direction, Position> MoveRover(Direction initialDirection, Position initialPosition)
+        public Rover MoveRover(Rover rover)
         {
-            var currentDirection = initialDirection;
+            var currentDirection = rover.Direction;
             var deltaOnYAxis = commands.Length;
 
-            Position currentPosition = initialPosition.Add(deltaOnYAxis);
+            Position currentPosition = rover.Position.Add(deltaOnYAxis);
             // 3.
             // Johan looks for more proof to refactor, question is if we want to wrap Direction right now?
             // Besides constraint, what proof do we need to wrap it? Needs behaviour or at least mean something in domain.
             // Let's wait with the refactoring of deltaOnYAxis and reevaluate after each "green".
 
-            var roverState = new Tuple<Direction, Position>(currentDirection, currentPosition);
+            var roverState = new Rover(currentDirection, currentPosition);
             return roverState;
         }
     }
