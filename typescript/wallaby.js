@@ -6,7 +6,7 @@ module.exports = function (w) {
     ],
 
     tests: [
-      'test/**/*-spec.ts'
+      'test/**/*.spec.ts'
     ],
 
     env: {
