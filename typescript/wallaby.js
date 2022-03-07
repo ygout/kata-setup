@@ -13,8 +13,5 @@ module.exports = function (w) {
       type: 'node'
     },
 
-    compilers: {
-      '**/*.ts': w.compilers.typeScript({ module: 'commonjs' })
-    }
   };
 };
