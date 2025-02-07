@@ -1,7 +1,7 @@
 import {describe, expect, it} from '@jest/globals';
 describe('greet function', () => {
-  it('should return bonjour emilie', () => {
-    expect(greet('emilie')).toEqual('bonjour emilie');
+  it('should return Bonjour, Emilie', () => {
+    expect(greet('Emilie')).toEqual('Bonjour Emilie');
   });
 });
 
