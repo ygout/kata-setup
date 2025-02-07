@@ -1,5 +1,5 @@
 
-limit=6
+limit=120
 # watch the state of the git changes, whenever the state is not pristine, start a counter that will increment,
 # when the counter reaches 120s, reset the changes
 # whenever the state becomes pristine again, reset the counter
