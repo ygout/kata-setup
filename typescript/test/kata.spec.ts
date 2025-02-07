@@ -7,5 +7,5 @@ describe('greet function', () => {
 
 
 function greet(name: string): string {
-  return `bonjour ${name}`;
+  return `Bonjour ${name}`;
 }
