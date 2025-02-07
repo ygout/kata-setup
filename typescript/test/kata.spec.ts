@@ -19,10 +19,12 @@ describe('greet function', () => {
 
 
 function greet(name: string | null): string {
+  const hasVirgule = name?.includes(',');
 
-  if(name === 'Sandra,Clément') {
-    return 'Bonjour Sandra et Clément';
+  if(hasVirgule) {
+    return `Bonjour ${name?.split(',').join(' et ')}`;
   }
+
   if(name === 'FRED') {
     return 'BONJOUR FRED!';
   }
