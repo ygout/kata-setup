@@ -18,26 +18,31 @@ describe('greet function', () => {
 
   it('should return Bonjour Jo, Ju, et Juju when Jo,Ju,Juju', () => {
     expect(greet('Jo,Ju,Juju')).toEqual('Bonjour Jo, Ju, et Juju');
-  })
+  });
 });
 
 
-function greet(name: string | null): string {
-  const hasVirgule = name?.includes(',');
-
-  if(name === 'Jo,Ju,Juju') {
-    return 'Bonjour Jo, Ju, et Juju';
-  }
-
-  if(hasVirgule) {
-    return `Bonjour ${name?.split(',').join(' et ')}`;
-  }
-
-  if(name === 'FRED') {
+function greet(name: string | null): string {
+  if (name === 'FRED') {
     return 'BONJOUR FRED!';
   }
-  if(name === null) {
+  if (name === null) {
     return 'Bonjour, mon ami';
   }
+
+  const nameSplit = name.split(',');
+
+  if (nameSplit.length === 2) {
+    return `Bonjour ${nameSplit.join(' et ')}`;
+  }
+
+  if (nameSplit.length > 2) {
+    const lastCommaIndex = name.lastIndexOf(',');
+    const firstPart = name.substring(0, lastCommaIndex);
+    const lastPart = name.substring(lastCommaIndex + 1);
+
+    return `Bonjour ${firstPart}, et ${lastPart}`;
+  }
+
   return `Bonjour ${name}`;
 }
